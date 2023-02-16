@@ -5,7 +5,7 @@
 
 export plot_denoise_each, denoise_each
 """
-    plot_denoise_each(;xrange,yrange,autoscale,fn1,fn2,fno,plot_size,lmargin1,lmargin2,rmargin,tmargin,bmargin,show,ms1,m2)
+    plot_denoise_each(;xrange,yrange,autoscale,fn1,fn2,fno,plot_size,lmargin1,lmargin2,rmargin,tmargin,bmargin,show,ms1,ms2)
 
 Make a figure of `fno` from the `denoise()` output file.
 
@@ -56,7 +56,7 @@ end
 """
     denoise_each(;xrange,yrange,method,autoscale,n,sigma1,sigma2,type,save,prompt,fn,fn0,plot_size,lmargin1,lmargin2,rmargin,tmargin,bmargin,show,fno1,fno2)
 
-Eliminate outliers from 
+Eliminate outliers from results of `pos_array_each`.
 Calculate travel-time residual, estimate smoothed travel-time residuals by `n` running `method` filter, exclude outliers beyond `sigma` Std, and plot them by `plot_denoise()`. The denoised observational file is rewritten in `fn4`.
 
 * `method`: Method of running filter ("mean" or "method"; `method="median"` by default)
