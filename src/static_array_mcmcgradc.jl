@@ -13,7 +13,7 @@ export static_array_mcmcgradc
     static_array_mcmcgradc(lat,TR_DEPTH,NPB,ss,gd0,sgd; fn1,fn2,fn3,fn4,nloop,nburn,ndelay,NA,lscale,aventd,daave,daind,tscale,fno0,fno1,fno2,fno3,fno4,fno5,fno6,fno7)
 
 Perform MCMC-based static array positioning considering a sloping sound speed strucre with a fixed number of temporal B-spline bases.
-Shallow gradients and gradient depth are constrained assuming prior Cauchy and normal distributions, respectively. 
+Shallow gradients and gradient depth are constrained assuming prior normal distributions. 
 
 * `lat`: Site latitude
 * `TR_DEPTH`: Transducer depth from the sea-surface
@@ -46,7 +46,7 @@ Shallow gradients and gradient depth are constrained assuming prior Cauchy and n
 # Example
     static_array_mcmcgradc(lat,TR_DEPTH,NPB,sgd=0.2)
 """ 
-function static_array_mcmcgradc(lat,TR_DEPTH=3.0,NPB=100::Int64, ss=3.e-4, gd0=0.65,sgd=0.1; NSB=100::Int64,nloop=1200000::Int64,nburn=200000::Int64,NA=5::Int64,lscale=1.0,fno0="log.txt"::String,fno1="sample.out"::String,fno2="mcmc.out"::String,fn1="tr-ant.inp"::String,fn2="pxp-ini.inp"::String,fn3="ss_prof.inp"::String,fn4="obsdata.inp"::String,fn5="initial.inp"::String,fno3="position.out"::String,fno4="statistics.out"::String,fno5="acceptance.out"::String,fno6="residual_grad.out"::String,fno7="bspline.out"::String,aventd=false,daave=2.e-6,daind=10.0,tscale=10.0,ndelay=1::Int64)
+function static_array_mcmcgradc(lat,TR_DEPTH=3.0,NPB=100::Int64, ss=1.5e-4, gd0=0.65,sgd=0.1; NSB=100::Int64,nloop=1200000::Int64,nburn=200000::Int64,NA=5::Int64,lscale=1.0,fno0="log.txt"::String,fno1="sample.out"::String,fno2="mcmc.out"::String,fn1="tr-ant.inp"::String,fn2="pxp-ini.inp"::String,fn3="ss_prof.inp"::String,fn4="obsdata.inp"::String,fn5="initial.inp"::String,fno3="position.out"::String,fno4="statistics.out"::String,fno5="acceptance.out"::String,fno6="residual_grad.out"::String,fno7="bspline.out"::String,aventd=false,daave=2.e-6,daind=10.0,tscale=10.0,ndelay=1::Int64)
   println(stderr," === GNSS-A positioning: static_array_mcmcgradc  ===")
   # --- Input check
   if TR_DEPTH < 0
