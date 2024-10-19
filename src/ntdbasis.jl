@@ -1,5 +1,5 @@
 # === Make temporal points for bspline interval
-export mktbasis, tbspline3, retrieveb
+export mktbasis, tbspline3, retrieveb, fill_bspline_coef
 
 """
     mktbasis(NPB,t1,t2,NN)
@@ -23,11 +23,11 @@ Output:
     smin, smax, ds, tb = mktbasis(NPB,t1,t2,num)
 """
 function mktbasis(NPB::Int64,t1,t2,NN::Int64)
-  if NPB < 1
-    error("mktbasis: number of B-spline basis must be integer and over 1")
+  if NPB < 3
+    error("mktbasis: number of B-spline basis must be integer and over 3")
   end
-  if NN < 1
-    error("mktbasis: number of data must be over 1")
+  if NN < 5
+    error("mktbasis: number of data must be over 5")
   end
   smin = findmin(t1)[1]
   smax = findmax(t2)[1]
@@ -123,4 +123,16 @@ function retrieveb(NPB::Int64,tb,ds,t1,t2,num::Int64)
   end
   println(stderr,"     B-spline knot: $NPB -> $NPBV")
   return Int(NPBV), Int.(round.(id))
+end
+
+function fill_bspline_coef(NPB,id,a,cons)
+  b = zeros(NPB)
+  sum = 0.0
+  for m in 1:NPB
+    if id[m] >= 1
+      b[m] = cons + a[id[m]]
+      sum += b[m]*b[m]
+    end
+  end
+  return b,sum
 end
